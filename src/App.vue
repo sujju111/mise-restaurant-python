@@ -221,7 +221,7 @@ function navigate(name: string) {
               >{{
                 mode === "local"
                   ? "Local workspace · sample service"
-                  : "Connected to Rust API"
+                  : "Connected to Python API"
               }}</span
             >
           </div>
@@ -989,7 +989,7 @@ function navigate(name: string) {
                   <section class="surface padded mt-6">
                     <h2>Connect your backend</h2>
                     <p class="muted mt-3">
-                      Use the included Rust + SQLite server when you’re ready
+                      Use the included Python + SQLite server when you’re ready
                       for shared devices.
                     </p>
                     <v-btn
@@ -1007,8 +1007,8 @@ function navigate(name: string) {
               ><span
                 >{{
                   mode === "local"
-                    ? "Persistent local demo · Rust engine"
-                    : "Rust API · shared workspace"
+                    ? "Persistent local demo · browser engine"
+                    : "Python API · shared workspace"
                 }}
                 <i class="live-dot"
               /></span>
@@ -1039,7 +1039,7 @@ function navigate(name: string) {
         </div>
         <template v-if="mode === 'local'"
           ><p class="muted mb-5">
-            Local mode runs the real Rust engine on this device. Role switching
+            Local mode uses a browser-local engine on this device. Role switching
             is for testing, not authentication.
           </p>
           <v-select
@@ -1047,7 +1047,7 @@ function navigate(name: string) {
             :items="['owner', 'waiter', 'kitchen', 'cashier']"
             label="Demo role"
           />
-          <h3 class="mb-4">Connect to your Rust server</h3>
+          <h3 class="mb-4">Connect to your Python server</h3>
           <v-text-field v-model="apiForm.url" label="API URL" /><v-text-field
             v-model="apiForm.token"
             label="Staff bearer token"

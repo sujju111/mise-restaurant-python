@@ -1,7 +1,7 @@
 import { uuid } from "./id";
 import { computed, ref } from "vue";
 import { get, set, update } from "idb-keyval";
-import seed from "../crates/core/src/seed.json";
+import seed from "./data/seed.json";
 import { bill, execute, initEngine } from "./engine";
 import type { Actor, Command, Role, State, CartLine } from "./types";
 export const state = ref<State>();
@@ -224,7 +224,7 @@ export async function connect(url: string, token: string) {
         refreshing = false;
       }
     }, 5000);
-    toast.value = "Connected to the Rust API";
+    toast.value = "Connected to the Python API";
   } catch (e) {
     apiUrl.value = old.url;
     bearer = old.bearer;

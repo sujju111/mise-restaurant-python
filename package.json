@@ -1,5 +1,5 @@
 {
-  "name": "mise-restaurant",
+  "name": "mise-restaurant-python",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -12,11 +12,10 @@
     "typecheck": "vue-tsc --noEmit",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "wasm": "node scripts/build-wasm.mjs",
     "native:sync": "npm run build && cap sync",
-    "check": "npm run typecheck && npm test && cargo test --workspace",
-    "setup:api": "node scripts/setup-api.mjs",
-    "api": "node --env-file=.env.local scripts/run-api.mjs",
+    "check": "npm run typecheck && npm test",
+    "setup:api": "python backend/setup_accounts.py",
+    "api": "python -m uvicorn mise.api:app --app-dir backend --env-file .env.local --host 127.0.0.1 --port 8080",
     "preview": "node scripts/serve-dist.mjs"
   },
   "dependencies": {

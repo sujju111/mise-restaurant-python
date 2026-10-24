@@ -1,9 +1,8 @@
 import { beforeAll, describe, it, expect } from "vitest";
-import { readFileSync } from "node:fs";
 import { initEngine, execute, bill } from "../src/engine";
-import seed from "../crates/core/src/seed.json";
+import seed from "../src/data/seed.json";
 import type { State, Command } from "../src/types";
-beforeAll(() => initEngine(readFileSync("public/engine/mise_core.wasm")));
+beforeAll(() => initEngine());
 const owner = { role: "owner" as const, name: "Owner" };
 const cmd = (op: string, data: unknown, key = "test-key-1234"): Command => ({
   op,
@@ -11,7 +10,7 @@ const cmd = (op: string, data: unknown, key = "test-key-1234"): Command => ({
   key,
   now: "2026-10-24T12:00:00Z",
 });
-describe("shipped Rust WebAssembly engine", () => {
+describe("browser TypeScript compatibility engine", () => {
   it("executes the real guest approval and settlement rules in the browser artifact", () => {
     let s = execute(
       structuredClone(seed) as State,

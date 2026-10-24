@@ -27,3 +27,9 @@ build/
 playwright-report/
 test-results/
 .DS_Store
+
+# Python edition
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]

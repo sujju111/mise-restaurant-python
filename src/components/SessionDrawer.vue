@@ -340,7 +340,7 @@ function printReceipt() {
               >
               <p class="tiny-note">
                 Staff orders go straight to the kitchen. Prices are validated by
-                Rust.
+                Python.
               </p>
             </aside>
           </div></template

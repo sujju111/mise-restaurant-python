@@ -27,7 +27,7 @@ jobs:
       - name: Build for the repository subpath
         run: npm run build
         env:
-          VITE_BASE_PATH: /mise-restaurant/
+          VITE_BASE_PATH: /mise-restaurant-python/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
