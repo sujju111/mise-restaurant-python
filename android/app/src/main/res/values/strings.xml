@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Mise</string>
+    <string name="title_activity_main">Mise</string>
+    <string name="package_name">com.mise.restaurant</string>
+    <string name="custom_url_scheme">com.mise.restaurant</string>
+</resources>
