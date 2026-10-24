@@ -1,6 +1,6 @@
 # Android and iOS
 
-Both native projects are generated with Capacitor 8. The Rust engine is bundled as WASM and runs inside the WebView; the optional Rust API runs separately, not as an on-device server.
+Both native projects are generated with Capacitor 8. The local TypeScript demo engine runs inside the WebView. The shared Python API runs separately on a server.
 
 ## Android
 
@@ -17,7 +17,7 @@ cd android
 
 Windows: use `gradlew.bat`. Install the result from `android/app/build/outputs/apk/debug/app-debug.apk` on a test device. This is a debug build, not a store release. Release signing needs a private keystore kept outside Git. Application ID: `com.mise.restaurant`.
 
-The instrumentation test launches the real MainActivity, waits for the WebView and checks that the Vue workspace and Rust engine have booted. The shared business and API tests run separately in CI. No real payments or cloud backend are required.
+The instrumentation test launches the real MainActivity, waits for the WebView and checks that the Vue workspace and browser engine have booted. The shared business and API tests run separately in CI. No real payments or cloud backend are required.
 
 ## iOS
 
@@ -35,4 +35,4 @@ CI builds and launches a simulator app, archives an unsigned device app, and pac
 
 Set both `VITE_MENU_URL` (the public guest website) and `VITE_API_URL` when you later enable cross-device QR ordering. Without a public guest website, native QR sharing is unavailable and the on-device guest preview remains usable.
 
-All demo food images, fonts and WebAssembly are bundled. The native app can run local workflows without an internet connection. Shared staff/guest service requires the reachable API and web menu; no offline multi-device synchronization is promised.
+All demo food images, fonts are bundled. The native app can run local workflows without an internet connection. Shared staff/guest service requires the reachable API and web menu; no offline multi-device synchronization is promised.

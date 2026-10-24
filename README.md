@@ -1,82 +1,50 @@
-# Mise
+# Mise — Python edition
 
-A thoughtful restaurant workspace built with **Vue 3 + Vuetify, Rust, SQLite and Capacitor**. The guest menu is a responsive website; staff can use the same application on web, Android or iOS.
+A restaurant workspace with **Python (FastAPI) + SQLite** backend, **Vue 3 + Vuetify** frontend, and **Capacitor** Android/iOS wrappers. Ported from [sujju111/mise-restaurant](https://github.com/sujju111/mise-restaurant), which remains unchanged.
 
-**Status: working local demo and pilot foundation, not certified for unattended production use.** The browser demo can be published to GitHub Pages; the Rust API is not deployed. The local browser demo uses the actual Rust business engine compiled to WebAssembly, with durable IndexedDB transactions. The optional API uses that same crate and a transactional SQLite database. No parallel JavaScript billing implementation.
+**Status:** functional local-demo/pilot foundation; **not production certified**. The offline, single-device web demo uses a TypeScript compatibility engine; shared multi-device operations use the authoritative Python API. This edition has no Rust or WebAssembly dependency.
 
-## Web demo on GitHub Pages
+## Features
 
-[Open the live Mise demo](https://sujju111.github.io/mise-restaurant/).
+Restaurant-specific menus, QR table visits, guest orders requiring staff acceptance, kitchen item preparation and serving, cash billing, integer paisa prices with tax/service rates, idempotent payment retries, manual stock adjustments, staff permissions and tenant-separated SQLite state.
 
-The Pages workflow publishes the browser-local demo. Every visitor gets their own local workspace; it does not host the Rust API or synchronize different devices. Use the included API when you later connect shared restaurant service.
+## Getting started (Windows PowerShell)
 
-## Try it
+Install Python 3.11+ and Node.js 22+, then run:
 
-Install Node.js 22+. The compiled WebAssembly engine is included, so Rust is optional for simply opening the demo.
-
-```sh
+```powershell
+git clone https://github.com/sujju111/mise-restaurant-python.git
+cd mise-restaurant-python
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r backend/requirements-dev.txt
 npm ci
 npm run dev
 ```
 
-Open the URL Vite prints (normally `http://localhost:5173`). The first visit loads a clearly labelled sample service. To start empty, use **Settings → Clear sample service**.
+Visit the Vite address, normally http://localhost:5173. Browser demo mode works without starting the Python API.
 
-1. Select an available table and open a dining session.
-2. Use **Table QR → Open this table’s guest menu**.
-3. Add dishes, review the cart and submit for staff approval.
-4. Return to staff, accept the request, then progress each item in **Kitchen**.
-5. Mark ready food served. Open **Bill**, record received cash, then close the visit.
-6. Mark the table clean before seating a new party. The previous visit’s QR expires.
-7. Edit prices and availability in **Menu studio**. Switch between Juniper House and Ember Kitchen to verify owner-specific menus and records.
+For shared API mode, open another terminal in the project directory:
 
-Local mode is a real single-device demo, with updates shared across tabs on the same origin. It is **not a multi-device sync service**. Local role switching is a testing convenience, not login. The server requires staff bearer credentials and derives role and tenant from those credentials.
+```powershell
+python backend/setup_accounts.py
+npm run api
+```
 
-## Included
+Copy your **Juniper owner** token from the printed output, then use the app's **Connection settings** and enter `http://localhost:8080` with that token. The API starts with empty visits and independent seeded menus.
 
-- Separate restaurant identity, menu, pricing, availability and operational records.
-- Table grid, dining sessions, current-visit QR and repeated order rounds.
-- Staff orders and guest requests with explicit acceptance or rejection.
-- Item-level kitchen preparation and serving states.
-- Integer minor-unit totals, configurable tax/service basis points, running bills, partial cash payments, duplicate-payment protection and overpayment rejection.
-- Cashier bills, print stylesheet and payment CSV export.
-- Waiter/bill requests with repeated-tap coalescing.
-- Owner-only menu/settings/manual stock adjustments, stock alerts and audit events.
-- Rust API with SQLite transactions, bearer roles, tenant scoping, body limits, explicit CORS and guest request limits.
-- Android and iOS native source projects and GitHub Actions definitions.
-- Rust domain/API tests, tests against the shipped WASM artifact and desktop/mobile Playwright specifications.
+## Test and build
 
-## Build and check
-
-To change Rust logic, install stable Rust and the WASM target:
-
-```sh
-rustup target add wasm32-unknown-unknown
-npm run wasm
+```powershell
+python -m pytest -q backend/tests
 npm run check
 npm run build
+npx playwright install chromium
+npm run test:e2e
+npm run native:sync
 ```
 
-The shared menu seed lives in `crates/core/src/seed.json`; the frontend imports it directly. All prices are integer paisa (NPR × 100), all quantities are whole units, tax and service are independently calculated on subtotal and rounded half-up to paisa. Confirm local tax treatment before live use.
+A GitHub Actions workflow runs Python/domain API tests, TypeScript/React-free Vue checks, Playwright web tests, Android debug packaging, and iOS simulator/unsigned IPA steps. Confirm workflow results in Actions before trusting generated artifacts.
 
-See [backend setup](docs/BACKEND.md), [mobile builds](docs/MOBILE.md), [architecture](docs/ARCHITECTURE.md), [verification](docs/VERIFICATION.md) and [release boundaries](docs/RELEASE.md).
+**GitHub Pages serves a browser-only demo. It cannot host FastAPI or synchronize restaurant devices.** Real QR ordering across phones requires a separately hosted HTTPS Python server and the `VITE_API_URL` / `VITE_MENU_URL` configuration. A debug APK isn't a store release; an unsigned IPA needs Apple Developer signing to install on iPhones.
 
-## GitHub
-
-The `.github/workflows/ci.yml` workflow runs on push, pull request and manual dispatch. It checks Rust/web code, builds a debug APK, runs an Android WebView instrumentation test, builds and launches an iOS simulator app, and packages an **unsigned IPA**. It does not deploy or publish to an app store.
-
-An unsigned IPA is an archive for signing, not an installable iPhone app. A store release needs your Apple Developer identity, provisioning and signing. The APK produced by this workflow is for testing and uses a debug key.
-
-If GitHub creation is unavailable in your current connected tool, this checkout is ready to upload to a new public repository with:
-
-```sh
-git init -b main
-git add .
-git commit -m "Initial Mise restaurant application"
-gh repo create mise-restaurant --public --source=. --remote=origin --push
-```
-
-Requires GitHub CLI authentication on your own computer. No access token belongs in this repository.
-
-## License and assets
-
-Original application code is MIT. Third-party packages retain their own licenses. Demo food photography is bundled from Unsplash; it is illustrative and does not represent each named dish exactly. Fonts are bundled for offline/native use. See [third-party notices](docs/THIRD_PARTY.md).
+See [backend](docs/BACKEND.md), [architecture](docs/ARCHITECTURE.md), [mobile](docs/MOBILE.md), [verification](docs/VERIFICATION.md) and [release boundaries](docs/RELEASE.md). License: MIT original application; third-party assets/dependencies retain their own notices.

@@ -1,5 +1,7 @@
 # Contributing
 
-Rust owns business rules; do not reimplement billing or authorization in Vue. Store prices in integer paisa. Test public command/API boundaries with known literal results. Never trust guest prices, roles or tenant IDs. A failed command must not change durable state. Keep credentials and real restaurant data outside Git.
+The Python module `backend/mise/core.py` owns authoritative multi-device billing and business rules. Do not trust the browser or submitted guest prices, roles, session tokens or tenant IDs. `src/engine.ts` is only for an offline single-device demo and should match the Python implementation.
 
-Run `cargo fmt --all`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace`, `npm run wasm`, `npm run typecheck`, `npm test`, `npm run build` and the desktop/mobile E2E tests before merging changes to operational flows. Keep UI controls accessible by name, clear about saving/error states and responsive to restaurant devices. New features need explicit scope and review.
+Money is stored in integer **paisa**. Failed operations must not mutate durable state. Keep secrets and any restaurant data out of commits. Run Python domain/API tests, Vue TypeScript checks, web build, Playwright tests and mobile builds before making changes to core operations.
+
+Python tests: `python -m pytest -q backend/tests`. Web tests: `npm run check && npm run build && npm run test:e2e`.

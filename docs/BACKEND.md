@@ -1,24 +1,20 @@
-# Local Rust API
+# Mise Python API
 
-Run `npm run setup:api` to generate `.env.local` with random development credentials. This file is ignored by Git and is never bundled into the frontend. Open it locally to copy the owner token, then run `npm run api` in a second terminal. Keep the web dev server running.
+This edition replaces Rust/Axum with **Python FastAPI + SQLite** while retaining these endpoints:
 
-Use the staff workspace avatar → Connection settings, API URL `http://localhost:8080`, and one generated token. Tokens remain in memory only. Remote URLs require HTTPS. The API starts empty; it does not import browser sample records.
+- Staff: `GET /api/me`, `GET /api/state`, `POST /api/command` (bearer token required).
+- Public menu: `GET /api/menu/{slug}`.
+- Guest: `GET /api/guest/{token}`, `POST /api/guest/{token}/command`.
+- Health: `GET /health`.
 
-`MISE_ACCOUNTS` is a JSON array of `{token,tenant,role,name}`. Valid tenants are `juniper`, `ember`; roles are owner, waiter, kitchen, cashier. Every token must be unique and at least 32 characters. This is a bounded pilot configuration, not self-service account registration. Replace this mechanism with expiring identity-provider sessions, token rotation, recovery and managed staff lifecycle before commercial rollout.
+## Local setup
 
-Environment:
+Requires Python 3.11+ and Node.js 22+. Install dependencies with `python -m pip install -r backend/requirements-dev.txt`, then run `python backend/setup_accounts.py` to generate ignored `.env.local` strong staff credentials. Start API with `npm run api` and Vue with `npm run dev` in a separate terminal.
 
-- `MISE_DATABASE`: SQLite path, default `mise.sqlite`.
-- `MISE_BIND`: default `127.0.0.1:8080`; explicitly set `0.0.0.0:8080` behind a secured reverse proxy when hosting.
-- `MISE_ORIGINS`: comma-separated allowlist of frontend origins. Default localhost web and Capacitor origins. Never use wildcard origins with staff credentials.
-- `MISE_ACCOUNTS`: required account configuration; no default credentials.
-- `VITE_MENU_URL`: public HTTPS URL of the guest web app (for example your future menu domain). Native QR sharing stays unavailable until configured, because Capacitor’s localhost origin is not a public website.
-- `VITE_API_URL`: optional build-time guest API base URL, required when sharing menu URLs across devices. Use HTTPS in mobile/hosted builds. Rebuild web assets and `npx cap sync` after changing it. This value is public; never place secrets in a `VITE_` variable.
+Use app Connection settings, API URL `http://localhost:8080`, and a generated staff token. The API seeds two separate restaurants, but starts with no dining visits. It does not import browser IndexedDB demo state or automatically migrate existing live databases.
 
-Staff endpoints: `GET /api/me`, `GET /api/state`, `POST /api/command`. Public menu: `GET /api/menu/{slug}`. Current guest visit: `GET /api/guest/{token}`, `POST /api/guest/{token}/command`. `GET /health` exposes health only.
+`MISE_ACCOUNTS`: JSON list of token, tenant, role, name. `MISE_DATABASE`: SQLite database file path. `MISE_ORIGINS`: explicit allowed frontend origins. `VITE_API_URL` and `VITE_MENU_URL` are **public frontend settings**, not secrets; for remote/native guest use they must point to HTTPS services.
 
-Commands are `{op,data,key,now}`. The API replaces `now` with a server timestamp, derives actor from credentials, and generates the random token for opening a visit. Send the same key when retrying uncertain order/payment submissions. Failures use 401/403/404/422/429 status codes and an `error` message. Monetary amounts use paisa. Database errors omit internal details.
+Commands take `{op, data, key, now}`; Python replaces timestamps and generates random current-visit tokens. Monetary values are integer paisa. Writes commit atomically; repeated accepted order and payment retry keys do not double-charge. Server enforces staff role and restaurant tenancy and limits requests to 64 KiB; guest API is rate-limited and returns only active visit information.
 
-SQLite uses WAL and transactional read-modify-write. Use the SQLite backup API or `sqlite3 mise.sqlite '.backup backup.sqlite'` for a consistent live backup; copying only the main DB file during writes is unsafe. Restore testing, authentication hardening, operational alerts, TLS, capacity tests, recovery procedures and audit retention are release prerequisites.
-
-Local HTTP works in a desktop browser. Native wrappers reject remote cleartext; use a trusted HTTPS endpoint rather than weakening platform transport protections. No backend or domain is deployed by this project.
+**Production gap:** This is a bounded pilot server. Set up real identity management, expiry/rotation, TLS, backups and restore drills, observability, merchant payment validation and concurrency/load tests before commercial use. Cash records are not online payment processing. GitHub Pages cannot run the API.

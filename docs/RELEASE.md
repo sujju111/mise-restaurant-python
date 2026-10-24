@@ -4,7 +4,7 @@ This delivery is a functional pilot foundation. It is not a claim that every mod
 
 ## Implemented
 
-Owner-scoped menus, table visits, current-visit QR, staff ordering, guest pending approval, item preparation/serving, running bills, partial cash recording, print summary, CSV, manual inventory, stock alerts, audit, local persistence, tenant-scoped Rust API and native project/workflow source.
+Owner-scoped menus, table visits, current-visit QR, staff ordering, guest pending approval, item preparation/serving, running bills, partial cash recording, print summary, CSV, manual inventory, stock alerts, audit, local persistence, tenant-scoped Python API and native project/workflow source.
 
 ## Before live service
 
@@ -18,4 +18,4 @@ Owner-scoped menus, table visits, current-visit QR, staff ordering, guest pendin
 - Complete Apple/Android release signing, app-store privacy declarations, actual device testing and store submission. Never ship debug signing for commercial distribution.
 - Add owner onboarding and arbitrary restaurant provisioning. Two isolated tenants are supplied to verify separation, not a complete subscription SaaS.
 
-The whole app works locally; customer orders on another phone do not magically sync without a server. The API never trusts local demo roles or browser price totals. Sensitive operations are permission-checked in Rust.
+The whole app works locally; customer orders on another phone do not magically sync without a server. The API never trusts local demo roles or browser price totals. Sensitive operations are permission-checked in Python.
