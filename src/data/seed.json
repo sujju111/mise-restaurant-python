@@ -1,0 +1,264 @@
+{
+  "schema": 1,
+  "version": 0,
+  "sequence": 1000,
+  "restaurant": {
+    "id": "juniper",
+    "slug": "juniper-house",
+    "name": "Juniper House",
+    "tagline": "Good food. A little slower.",
+    "address": "Jhamsikhel, Lalitpur",
+    "tax_bps": 0,
+    "service_bps": 0
+  },
+  "menu": [
+    {
+      "id": "dish-1",
+      "name": "Jhol momo",
+      "description": "Hand-folded dumplings in a toasted sesame and tomato broth.",
+      "category": "House favourites",
+      "price": 32000,
+      "available": true,
+      "image": "momo",
+      "dietary": ""
+    },
+    {
+      "id": "dish-2",
+      "name": "Himalayan grain bowl",
+      "description": "Seasonal greens, roasted vegetables, grains and a bright herb dressing.",
+      "category": "House favourites",
+      "price": 46000,
+      "available": true,
+      "image": "bowl",
+      "dietary": "Vegetarian"
+    },
+    {
+      "id": "dish-3",
+      "name": "Butter chicken",
+      "description": "Slow-simmered tomato gravy, charred chicken and a swirl of cream.",
+      "category": "From the kitchen",
+      "price": 58000,
+      "available": true,
+      "image": "curry",
+      "dietary": ""
+    },
+    {
+      "id": "dish-4",
+      "name": "Garden & burrata",
+      "description": "Creamy burrata, heirloom tomatoes, basil and cold-pressed olive oil.",
+      "category": "Small plates",
+      "price": 49000,
+      "available": true,
+      "image": "salad",
+      "dietary": "Vegetarian"
+    },
+    {
+      "id": "dish-5",
+      "name": "Crispy chilli potatoes",
+      "description": "Golden potatoes tossed with peppers, sesame and our chilli glaze.",
+      "category": "Small plates",
+      "price": 29000,
+      "available": true,
+      "image": "bowl",
+      "dietary": "Vegan"
+    },
+    {
+      "id": "dish-6",
+      "name": "Dal bhat set",
+      "description": "Comfort on a plate. Lentils, steamed rice, seasonal curry and house pickle.",
+      "category": "From the kitchen",
+      "price": 42000,
+      "available": true,
+      "image": "curry",
+      "dietary": "Vegetarian"
+    },
+    {
+      "id": "dish-7",
+      "name": "Grilled chicken bowl",
+      "description": "Flame-grilled chicken, fragrant rice, crunchy greens and lemon.",
+      "category": "From the kitchen",
+      "price": 52000,
+      "available": true,
+      "image": "bowl",
+      "dietary": ""
+    },
+    {
+      "id": "dish-8",
+      "name": "Chocolate fondant",
+      "description": "A warm dark chocolate centre, vanilla cream and cacao crumble.",
+      "category": "Something sweet",
+      "price": 35000,
+      "available": true,
+      "image": "dessert",
+      "dietary": "Vegetarian"
+    },
+    {
+      "id": "dish-9",
+      "name": "Seasonal cheesecake",
+      "description": "Baked vanilla cheesecake with a tart seasonal fruit compote.",
+      "category": "Something sweet",
+      "price": 38000,
+      "available": true,
+      "image": "dessert",
+      "dietary": "Vegetarian"
+    },
+    {
+      "id": "dish-10",
+      "name": "Peach iced tea",
+      "description": "House-brewed black tea, peach, mint and a little sunshine.",
+      "category": "Drinks",
+      "price": 18000,
+      "available": true,
+      "image": "drink",
+      "dietary": "Vegan"
+    },
+    {
+      "id": "dish-11",
+      "name": "Himalayan lemonade",
+      "description": "Fresh lemon, mountain honey and a touch of ginger.",
+      "category": "Drinks",
+      "price": 16000,
+      "available": true,
+      "image": "drink",
+      "dietary": "Vegetarian"
+    },
+    {
+      "id": "dish-12",
+      "name": "Cold brew",
+      "description": "A smooth, slow-steeped coffee from Nepali-grown beans.",
+      "category": "Drinks",
+      "price": 22000,
+      "available": true,
+      "image": "drink",
+      "dietary": "Vegan"
+    }
+  ],
+  "tables": [
+    {
+      "id": "table-1",
+      "name": "Table 01",
+      "seats": 2,
+      "section": "Main room",
+      "dirty": false
+    },
+    {
+      "id": "table-2",
+      "name": "Table 02",
+      "seats": 2,
+      "section": "Main room",
+      "dirty": false
+    },
+    {
+      "id": "table-3",
+      "name": "Table 03",
+      "seats": 4,
+      "section": "Main room",
+      "dirty": false
+    },
+    {
+      "id": "table-4",
+      "name": "Table 04",
+      "seats": 6,
+      "section": "Main room",
+      "dirty": false
+    },
+    {
+      "id": "table-5",
+      "name": "Table 05",
+      "seats": 2,
+      "section": "Main room",
+      "dirty": false
+    },
+    {
+      "id": "table-6",
+      "name": "Table 06",
+      "seats": 4,
+      "section": "Main room",
+      "dirty": false
+    },
+    {
+      "id": "table-7",
+      "name": "Table 07",
+      "seats": 4,
+      "section": "Main room",
+      "dirty": false
+    },
+    {
+      "id": "table-8",
+      "name": "Table 08",
+      "seats": 6,
+      "section": "Main room",
+      "dirty": true
+    },
+    {
+      "id": "table-9",
+      "name": "Table 09",
+      "seats": 2,
+      "section": "Terrace",
+      "dirty": false
+    },
+    {
+      "id": "table-10",
+      "name": "Table 10",
+      "seats": 4,
+      "section": "Terrace",
+      "dirty": false
+    },
+    {
+      "id": "table-11",
+      "name": "Table 11",
+      "seats": 4,
+      "section": "Terrace",
+      "dirty": false
+    },
+    {
+      "id": "table-12",
+      "name": "Table 12",
+      "seats": 4,
+      "section": "Terrace",
+      "dirty": false
+    }
+  ],
+  "sessions": [],
+  "orders": [],
+  "payments": [],
+  "requests": [],
+  "stock": [
+    {
+      "id": "rice",
+      "name": "Basmati rice",
+      "unit": "kg",
+      "quantity": 28,
+      "threshold": 10
+    },
+    {
+      "id": "chicken",
+      "name": "Chicken",
+      "unit": "kg",
+      "quantity": 8,
+      "threshold": 10
+    },
+    {
+      "id": "flour",
+      "name": "All-purpose flour",
+      "unit": "kg",
+      "quantity": 18,
+      "threshold": 5
+    },
+    {
+      "id": "tomato",
+      "name": "Tomatoes",
+      "unit": "kg",
+      "quantity": 4,
+      "threshold": 6
+    },
+    {
+      "id": "coffee",
+      "name": "Coffee beans",
+      "unit": "kg",
+      "quantity": 7,
+      "threshold": 3
+    }
+  ],
+  "audit": []
+}
